@@ -1,0 +1,1146 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BSA Troop 128</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #003f7f 0%, #0066cc 100%);
+      color: #333;
+      height: 100%;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      min-height: 100%;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #003f7f 0%, #0066cc 100%);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .header-text h1 {
+      margin: 0;
+      font-size: 42px;
+      font-weight: 900;
+      font-family: 'Impact', 'Arial Black', sans-serif;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      letter-spacing: 2px;
+      color: #ffd700;
+    }
+
+    .header-text p {
+      margin: 8px 0 0 0;
+      font-size: 20px;
+      font-weight: 600;
+      font-family: 'Georgia', serif;
+      font-style: italic;
+      color: #e6f3ff;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+      letter-spacing: 1px;
+    }
+
+    /* Navigation */
+    .nav {
+      background: #002d5a;
+      padding: 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      background: none;
+      border: none;
+      color: white;
+      padding: 15px 25px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border-bottom: 3px solid transparent;
+    }
+
+    .nav-btn:hover, .nav-btn.active {
+      background: rgba(255, 255, 255, 0.1);
+      border-bottom-color: #ffd700;
+    }
+
+    /* Main Content */
+    .main-content {
+      padding: 40px 20px;
+      min-height: 500px;
+    }
+
+    .page {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .page h2 {
+      color: #003f7f;
+      font-size: 28px;
+      margin-bottom: 20px;
+      border-bottom: 3px solid #ffd700;
+      padding-bottom: 10px;
+    }
+
+    .page h3 {
+      color: #0066cc;
+      font-size: 22px;
+      margin-top: 30px;
+      margin-bottom: 15px;
+    }
+
+    .page p {
+      line-height: 1.6;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+
+    /* Home Page Styles */
+    .welcome-section {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      padding: 30px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      border-top: 4px solid #0066cc;
+    }
+
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      background: #0066cc;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px;
+      color: white;
+      font-size: 24px;
+    }
+
+    /* Camping Page Styles */
+    .camping-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin-top: 20px;
+    }
+
+    .camping-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      border-left: 5px solid #28a745;
+    }
+
+    .camping-header {
+      background: #28a745;
+      color: white;
+      padding: 15px 20px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .camping-content {
+      padding: 20px;
+    }
+
+    .camping-date {
+      background: #ffd700;
+      color: #333;
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-size: 14px;
+      font-weight: bold;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    /* Calendar Styles */
+    .calendar-container {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      margin-top: 20px;
+    }
+
+    .calendar-header {
+      background: #0066cc;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .calendar-nav-btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .calendar-nav-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 1px;
+      background: #dee2e6;
+    }
+
+    .calendar-day-header {
+      background: #6c757d;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .calendar-day {
+      background: white;
+      padding: 15px 10px;
+      min-height: 80px;
+      position: relative;
+      font-size: 14px;
+    }
+
+    .calendar-day.has-event {
+      background: #e3f2fd;
+    }
+
+    .calendar-day.holiday {
+      background: #ffebee;
+      color: #666;
+    }
+
+    .calendar-day.meeting-day {
+      background: #e8f5e8;
+      border: 2px solid #28a745;
+    }
+
+    .calendar-event {
+      background: #0066cc;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 10px;
+      margin-top: 5px;
+      display: block;
+    }
+
+    .calendar-event.meeting {
+      background: #28a745;
+    }
+
+    .calendar-event.holiday {
+      background: #dc3545;
+    }
+
+    .calendar-event.camping {
+      background: #fd7e14;
+    }
+
+    /* Location Page Styles */
+    .location-info {
+      background: #f8f9fa;
+      padding: 25px;
+      border-radius: 10px;
+      margin-bottom: 25px;
+    }
+
+    .directions-section {
+      margin-top: 20px;
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .directions-buttons {
+      display: flex;
+      gap: 15px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+
+    .map-btn {
+      background: #28a745;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 8px;
+      text-decoration: none;
+      text-align: center;
+      font-weight: 600;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+      min-width: 200px;
+      justify-content: center;
+    }
+
+    .map-btn:hover {
+      background: #1e7e34;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .map-btn.apple-maps {
+      background: #007aff;
+    }
+
+    .map-btn.apple-maps:hover {
+      background: #0056b3;
+    }
+
+    .landmarks {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+      border-left: 4px solid #0066cc;
+      margin-top: 20px;
+    }
+
+    .landmarks h4 {
+      margin: 0 0 15px 0;
+      color: #0066cc;
+      font-size: 18px;
+    }
+
+    .landmarks ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .landmarks li {
+      margin-bottom: 8px;
+      color: #333;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 768px) {
+      .directions-buttons {
+        flex-direction: column;
+      }
+      
+      .map-btn {
+        min-width: auto;
+      }
+    }
+
+    /* Links Page Styles */
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .link-card {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s ease;
+      border-top: 4px solid #dc3545;
+    }
+
+    .link-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .link-card.scoutbook {
+      border-top-color: #28a745;
+    }
+
+    .link-card.bsa {
+      border-top-color: #0066cc;
+    }
+
+    .link-logo {
+      width: 80px;
+      height: 80px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px;
+      font-weight: bold;
+      color: #333;
+      font-size: 12px;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .link-btn {
+      background: #0066cc;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .link-btn:hover {
+      background: #0052a3;
+    }
+
+    .link-btn.scoutbook {
+      background: #28a745;
+    }
+
+    .link-btn.scoutbook:hover {
+      background: #1e7e34;
+    }
+
+    /* Footer */
+    .footer {
+      background: #002d5a;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+      }
+
+      .nav-buttons {
+        flex-direction: column;
+      }
+
+      .nav-btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      .main-content {
+        padding: 20px 15px;
+      }
+
+      .calendar-grid {
+        font-size: 12px;
+      }
+
+      .calendar-day {
+        min-height: 60px;
+        padding: 8px 5px;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="container"><!-- Header -->
+   <header class="header">
+    <div class="header-content">
+     <div class="header-text">
+      <h1 id="troop-name">BSA Troop 128</h1>
+      <p id="troop-motto">Be Prepared</p>
+     </div>
+    </div>
+   </header><!-- Navigation -->
+   
+<nav class="nav">
+  <div class="nav-buttons">
+    <button class="nav-btn active" onclick="showPage('home', this)">Home</button>
+    <button class="nav-btn" onclick="showPage('camping', this)">Camping</button>
+    <button class="nav-btn" onclick="showPage('meetings', this)">Meetings</button>
+    <button class="nav-btn" onclick="showPage('location', this)">Location</button>
+    <button class="nav-btn" onclick="showPage('links', this)">Links</button>
+  </div>
+</nav>
+
+    </div>
+   </nav><!-- Main Content -->
+   <main class="main-content"><!-- Home Page -->
+    <div id="home" class="page active">
+     <div class="welcome-section">
+      <h2>Welcome to Troop 128!</h2>
+      <p>We are a dynamic Boy Scout troop dedicated to developing character, citizenship, and fitness in young people. Our troop has been serving the community for years, helping scouts achieve their goals and become leaders of tomorrow.</p>
+     </div>
+     <div class="features-grid">
+      <div class="feature-card">
+       <div class="feature-icon">
+        🏕️
+       </div>
+       <h3>Camping</h3>
+       <p>Experience the great outdoors with monthly camping trips to amazing locations. Build skills, make friends, and create memories that last a lifetime.</p>
+      </div>
+      <div class="feature-card">
+       <div class="feature-icon">
+        🎯
+       </div>
+       <h3>Scouting Skills</h3>
+       <p>Learn essential life skills through hands-on activities and challenges. Discover new interests and develop expertise that will serve you throughout life.</p>
+      </div>
+      <div class="feature-card">
+       <div class="feature-icon">
+        ⚡
+       </div>
+       <h3>Leadership</h3>
+       <p>Develop leadership skills through patrol activities, troop positions, and community service projects. Learn to lead by example and inspire others.</p>
+      </div>
+      <div class="feature-card">
+       <div class="feature-icon">
+        🦅
+       </div>
+       <h3>Eagle Scout</h3>
+       <p>Work toward Scouting's highest rank. Our troop has a strong tradition of supporting scouts on their journey to Eagle Scout. Many scouts have finished eagle in our troop.</p>
+      </div>
+     </div>
+     <h3>About Our Troop</h3>
+     <p>Troop 128 meets regularly on monday's and provides a comprehensive scouting program that includes outdoor adventures, skill development, community service, and leadership training. We welcome new members and their families to join our scouting community.</p>
+     <p><strong>Scoutmaster:</strong> <span id="scoutmaster-name">Mr. Chris</span></p>
+     <p><strong>Contact:</strong> <span id="contact-email">troop128@example.com</span></p>
+    </div><!-- Camping Page -->
+    <div id="camping" class="page">
+     <h2>Camping Adventures</h2>
+     <p>Our troop goes on exciting camping trips throughout the year. Here are some of our favorite destinations and upcoming adventures:</p>
+     <div class="camping-grid">
+      <div class="camping-card">
+       <div class="camping-header">
+        🏕️ Camp Shands
+       </div>
+       <div class="camping-content">
+        <div class="camping-date">
+         Soon...
+        </div>
+        <p><strong>Location:</strong> Camp Shands, Melrose, FL</p>
+        <p><strong>Activities:</strong> Swimming, canoeing, fishing, archery, rifle shooting, merit badge sessions</p>
+        <p><strong>What to Expect:</strong> North Central Florida Council's premier camp on beautiful Kingsley Lake. Features a 2,000-acre property with crystal-clear spring-fed lake, perfect for aquatics programs and outdoor adventure.</p>
+       </div>
+      </div>
+      <div class="camping-card">
+       <div class="camping-header">
+        🌲 Camp Echockotee
+       </div>
+       <div class="camping-content">
+        <div class="camping-date">
+         Soon...
+        </div>
+        <p><strong>Location:</strong> Camp Echockotee, Hawthorne, FL</p>
+        <p><strong>Activities:</strong> High adventure, climbing tower, zip line, wilderness skills, team building</p>
+        <p><strong>What to Expect:</strong> North Central Florida Council's high adventure base featuring a 40-foot climbing tower, and challenging outdoor programs. Perfect for older scouts seeking adventure and leadership development.</p>
+       </div>
+      </div>
+      <div class="camping-card" style="border-left-color: #6c757d;">
+       <div class="camping-header" style="background: #6c757d; display: flex; align-items: center; justify-content: center; font-size: 24px; padding: 40px 20px;">
+        More to come!
+       </div>
+       <div class="camping-content">
+        <p style="text-align: center; color: #6c757d; font-style: italic;">We're planning more exciting camping adventures throughout the year. Check back soon for updates on additional trips and outdoor activities!</p>
+       </div>
+      </div>
+     </div>
+     <h3>What to Bring</h3>
+     <p>Each camping trip has a specific packing list, but essentials include: sleeping bag, tent (if not provided), weather-appropriate clothing, personal hygiene items, water bottles, and any required merit badge materials. Detailed packing lists are provided before each trip.</p>
+    </div><!-- Meetings Page -->
+    <div id="meetings" class="page">
+     <h2>Meeting Schedule</h2>
+     <p><strong>Regular Meetings:</strong> <span id="meeting-day">Every Tuesday</span> from <span id="meeting-time">7:00 PM - 8:30 PM</span></p>
+     <p><strong>Location:</strong> <span id="meeting-location">Community Center</span></p>
+     <div class="calendar-container">
+      <div class="calendar-header"><button class="calendar-nav-btn" onclick="changeMonth(-1)">‹</button> <span id="calendar-month-year">March 2024</span> <button class="calendar-nav-btn" onclick="changeMonth(1)">›</button>
+      </div>
+      <div class="calendar-grid" id="calendar-grid"><!-- Calendar will be generated by JavaScript -->
+      </div>
+     </div>
+     <h3>Meeting Activities</h3>
+     <p>Our weekly meetings include:</p>
+     <ul>
+      <li><strong>Opening Ceremony:</strong> Flag ceremony and Scout Oath/Law</li>
+      <li><strong>Patrol Time:</strong> Small group activities and planning</li>
+      <li><strong>Skill Instruction:</strong> Merit badge work and outdoor skills</li>
+      <li><strong>Games &amp; Activities:</strong> Fun team-building exercises</li>
+      <li><strong>Announcements:</strong> Upcoming events and important information</li>
+      <li><strong>Closing:</strong> Reflection and dismissal</li>
+     </ul>
+     <h3>Special Events</h3>
+     <p>In addition to regular meetings, we host special events throughout the year including Court of Honor ceremonies, Eagle Scout ceremonies, community service projects, and fundraising activities.</p>
+    </div><!-- Location Page -->
+    <div id="location" class="page">
+     <h2>Where We Meet</h2>
+     <div class="location-info">
+      <h3>Meeting Location</h3>
+      <p><strong>Address:</strong> <span id="location-address">Kirkwood Presbyterian Church, 8701 Argyle Forest Blvd, Jacksonville, FL 32244</span></p>
+      <p><strong>Meeting Room:</strong> Main room</p>
+      <p><strong>Parking:</strong> Free parking available in the church parking lot</p>
+      <p><strong>Accessibility:</strong> Wheelchair accessible entrance and facilities</p>
+     </div>
+     <div class="landmarks">
+      <h4>🏢 Nearby Landmarks</h4>
+      <ul>
+       <li>Argyle Forest Elementary School (0.3 mi)</li>
+       <li>Winn Dixie Shopping Center (0.1 mi)</li>
+       <li>Orange Park Mall (2.1 mi)</li>
+      </ul>
+     </div>
+     <h3>What to Expect</h3>
+     <p>Kirkwood Presbyterian Church is a welcoming facility with ample meeting space, restrooms, and kitchen facilities. We meet in the Main room, which is equipped with tables, chairs, and storage for our troop equipment. Parents are welcome to stay during meetings or use the lobby area.</p>
+     <h3>Contact for Directions</h3>
+     <p>If you need help finding us, please contact our Scoutmaster at <span id="location-contact">troop128@example.com</span> or call the church office at (904) 771-4345.</p>
+    </div><!-- Links Page -->
+    <div id="links" class="page">
+     <h2>Important Links</h2>
+     <p>Here are essential resources for scouts and parents:</p>
+     <div class="links-grid">
+      <div class="link-card scoutbook">
+       <div class="link-logo" style="background: #28a745; color: white;">
+        SCOUT<br>
+        BOOK
+       </div>
+       <h3>Scoutbook</h3>
+       <p>Track your advancement, view upcoming events, and communicate with troop leaders. All scouts and parents should have Scoutbook accounts.</p><a href="https://scoutbook.scouting.org" target="_blank" rel="noopener noreferrer" class="link-btn scoutbook">Visit Scoutbook</a>
+      </div>
+      <div class="link-card bsa">
+       <div class="link-logo" style="background: #0066cc; color: white;">
+        BSA<br>
+        MAIN
+       </div>
+       <h3>BSA Official Website</h3>
+       <p>The official Boy Scouts of America website with resources, news, and information about scouting programs nationwide.</p><a href="https://www.scouting.org" target="_blank" rel="noopener noreferrer" class="link-btn">Visit BSA.org</a>
+      </div>
+      <div class="link-card">
+       <div class="link-logo" style="background: #dc3545; color: white;">
+        MERIT<br>
+        BADGE
+       </div>
+       <h3>Merit Badge Resources</h3>
+       <p>Find merit badge requirements, worksheets, and counselor information to help you advance through the ranks.</p><a href="https://www.scouting.org/programs/scouts-bsa/advancement-and-awards/merit-badges/" target="_blank" rel="noopener noreferrer" class="link-btn">Merit Badges</a>
+      </div>
+      <div class="link-card">
+       <div class="link-logo" style="background: #6f42c1; color: white;">
+        COUNCIL<br>
+        SITE
+       </div>
+       <h3>Local Council</h3>
+       <p>Visit our local council website for area events, camps, training opportunities, and council-specific information.</p><a href="https:/https:/www.nfcscouting.org/" target="_blank" rel="noopener noreferrer" class="link-btn">Find Council</a>
+      </div>
+      <div class="link-card">
+       <div class="link-logo" style="background: #fd7e14; color: white;">
+        TRAINING<br>
+        CENTER
+       </div>
+       <h3>Training Resources</h3>
+       <p>Access online training modules for youth and adult leaders. Complete required training and earn certifications.</p><a href="https://www.scouting.org/training/" target="_blank" rel="noopener noreferrer" class="link-btn">Training</a>
+      </div>
+      <div class="link-card">
+       <div class="link-logo" style="background: #20c997; color: white;">
+        SCOUT<br>
+        SHOP
+       </div>
+       <h3>Scout Shop</h3>
+       <p>Purchase uniforms, handbooks, merit badge materials, and other official scouting supplies and equipment.</p><a href="https://www.scoutshop.org" target="_blank" rel="noopener noreferrer" class="link-btn">Scout Shop</a>
+      </div>
+     </div>
+     <h3>Mobile Apps</h3>
+     <p>Download these helpful apps:</p>
+     <ul>
+      <li><strong>Scoutbook Mobile:</strong> Available for iOS and Android</li>
+      <li><strong>Merit Badge Tracker:</strong> Track your progress on the go</li>
+      <li><strong>Scout Handbook:</strong> Digital version of the official handbook</li>
+     </ul>
+     <h3>Emergency Contacts</h3>
+     <p>For urgent troop matters or emergencies during events:</p>
+     <p><strong>Scoutmaster:</strong> <span id="emergency-contact">Chris McKeown - (904) 345-0034</span></p>
+     <p><strong>Committee Chair:</strong> Ms. Andrea - (123) 123-4567</p>
+    </div>
+   </main><!-- Footer -->
+   <footer class="footer">
+    <p>© 2024 BSA Troop 128. All rights reserved. | Be Prepared</p>
+    <p>Boy Scouts of America® and all related marks are owned by the Boy Scouts of America</p>
+   </footer>
+  </div>
+  <script>
+    const defaultConfig = {
+      troop_name: "BSA Troop 128",
+      troop_motto: "Be Prepared",
+      meeting_day: "Every Monday",
+      meeting_time: "7:00 PM - 8:30 PM",
+      meeting_location: "Kirkwood Presbyterian Church",
+      scoutmaster_name: "Mr. Chris",
+      contact_email: "troop128@example.com",
+      background_color: "#003f7f",
+      surface_color: "#0066cc",
+      text_color: "#333333",
+      primary_action_color: "#ffd700",
+      secondary_action_color: "#28a745",
+      font_family: "Arial",
+      font_size: 16
+    };
+
+    // Calendar functionality
+    let currentDate = new Date();
+    
+    // Major holidays when meetings are cancelled
+    const holidays = {
+      2024: [
+        { month: 0, day: 1, name: "New Year's Day" },
+        { month: 0, day: 15, name: "MLK Day" },
+        { month: 1, day: 19, name: "Presidents Day" },
+        { month: 4, day: 27, name: "Memorial Day" },
+        { month: 6, day: 4, name: "Independence Day" },
+        { month: 8, day: 2, name: "Labor Day" },
+        { month: 9, day: 14, name: "Columbus Day" },
+        { month: 10, day: 11, name: "Veterans Day" },
+        { month: 10, day: 28, name: "Thanksgiving" },
+        { month: 11, day: 25, name: "Christmas Day" }
+      ],
+      2025: [
+        { month: 0, day: 1, name: "New Year's Day" },
+        { month: 0, day: 20, name: "MLK Day" },
+        { month: 1, day: 17, name: "Presidents Day" },
+        { month: 4, day: 26, name: "Memorial Day" },
+        { month: 6, day: 4, name: "Independence Day" },
+        { month: 8, day: 1, name: "Labor Day" },
+        { month: 9, day: 13, name: "Columbus Day" },
+        { month: 10, day: 11, name: "Veterans Day" },
+        { month: 10, day: 27, name: "Thanksgiving" },
+        { month: 11, day: 25, name: "Christmas Day" }
+      ]
+    };
+
+    // DCPS School Calendar - No meetings when school is not in session
+    const schoolBreaks = {
+      2024: [
+        // Winter Break (continuing from 2023)
+        { startMonth: 0, startDay: 1, endMonth: 0, endDay: 8, name: "Winter Break" },
+        // Spring Break
+        { startMonth: 2, startDay: 25, endMonth: 3, endDay: 1, name: "Spring Break" },
+        // Summer Break
+        { startMonth: 5, startDay: 7, endMonth: 7, endDay: 26, name: "Summer Break" },
+        // Fall Break
+        { startMonth: 9, startDay: 14, endMonth: 9, endDay: 18, name: "Fall Break" },
+        // Thanksgiving Break
+        { startMonth: 10, startDay: 25, endMonth: 10, endDay: 29, name: "Thanksgiving Break" },
+        // Winter Break
+        { startMonth: 11, startDay: 23, endMonth: 11, endDay: 31, name: "Winter Break" }
+      ],
+      2025: [
+        // Winter Break (continuing from 2024)
+        { startMonth: 0, startDay: 1, endMonth: 0, endDay: 6, name: "Winter Break" },
+        // Spring Break
+        { startMonth: 2, startDay: 24, endMonth: 2, endDay: 28, name: "Spring Break" },
+        // Summer Break
+        { startMonth: 5, startDay: 6, endMonth: 7, endDay: 25, name: "Summer Break" },
+        // Fall Break
+        { startMonth: 9, startDay: 13, endMonth: 9, endDay: 17, name: "Fall Break" },
+        // Thanksgiving Break
+        { startMonth: 10, startDay: 24, endMonth: 10, endDay: 28, name: "Thanksgiving Break" },
+        // Winter Break
+        { startMonth: 11, startDay: 22, endMonth: 11, endDay: 31, name: "Winter Break" }
+      ]
+    };
+
+    // Camping trips
+    const campingTrips = [
+      { year: 2024, month: 2, startDay: 15, endDay: 17, name: "Mountain Ridge" },
+      { year: 2024, month: 3, startDay: 12, endDay: 14, name: "Lake Adventure" },
+      { year: 2024, month: 4, startDay: 17, endDay: 19, name: "Forest Survival" },
+      { year: 2024, month: 5, startDay: 21, endDay: 23, name: "Historical Sites" },
+      { year: 2024, month: 6, startDay: 14, endDay: 20, name: "Summer Camp" },
+      { year: 2024, month: 9, startDay: 11, endDay: 13, name: "Fall Colors" }
+    ];
+
+    function isHoliday(year, month, day) {
+      const yearHolidays = holidays[year];
+      if (!yearHolidays) return null;
+      return yearHolidays.find(h => h.month === month && h.day === day);
+    }
+
+    function isSchoolBreak(year, month, day) {
+      const yearBreaks = schoolBreaks[year];
+      if (!yearBreaks) return null;
+      
+      return yearBreaks.find(breakPeriod => {
+        // Handle breaks that span across months
+        if (breakPeriod.startMonth === breakPeriod.endMonth) {
+          // Same month
+          return month === breakPeriod.startMonth && 
+                 day >= breakPeriod.startDay && 
+                 day <= breakPeriod.endDay;
+        } else {
+          // Spans multiple months
+          return (month === breakPeriod.startMonth && day >= breakPeriod.startDay) ||
+                 (month === breakPeriod.endMonth && day <= breakPeriod.endDay) ||
+                 (month > breakPeriod.startMonth && month < breakPeriod.endMonth);
+        }
+      });
+    }
+
+    function isCampingDay(year, month, day) {
+      return campingTrips.find(trip => 
+        trip.year === year && 
+        trip.month === month && 
+        day >= trip.startDay && 
+        day <= trip.endDay
+      );
+    }
+
+    function isMonday(date) {
+      return date.getDay() === 1;
+    }
+
+    function generateCalendar(year, month) {
+      const firstDay = new Date(year, month, 1);
+      const lastDay = new Date(year, month + 1, 0);
+      const startDate = new Date(firstDay);
+      startDate.setDate(startDate.getDate() - firstDay.getDay());
+      
+      const monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ];
+      
+      document.getElementById('calendar-month-year').textContent = ${monthNames[month]} ${year};
+      
+      const calendarGrid = document.getElementById('calendar-grid');
+      calendarGrid.innerHTML = '';
+      
+      // Add day headers
+      const dayHeaders = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      dayHeaders.forEach(day => {
+        const header = document.createElement('div');
+        header.className = 'calendar-day-header';
+        header.textContent = day;
+        calendarGrid.appendChild(header);
+      });
+      
+      // Generate calendar days
+      const currentDateObj = new Date(startDate);
+      for (let i = 0; i < 42; i++) {
+        const dayElement = document.createElement('div');
+        dayElement.className = 'calendar-day';
+        
+        const dayNumber = currentDateObj.getDate();
+        const isCurrentMonth = currentDateObj.getMonth() === month;
+        
+        if (isCurrentMonth) {
+          dayElement.textContent = dayNumber;
+          
+          const holiday = isHoliday(year, month, dayNumber);
+          const schoolBreak = isSchoolBreak(year, month, dayNumber);
+          const camping = isCampingDay(year, month, dayNumber);
+          const isMonday = currentDateObj.getDay() === 1;
+          
+          if (holiday) {
+            dayElement.classList.add('holiday');
+            const eventSpan = document.createElement('span');
+            eventSpan.className = 'calendar-event holiday';
+            eventSpan.textContent = holiday.name;
+            dayElement.appendChild(eventSpan);
+          } else if (schoolBreak) {
+            dayElement.classList.add('holiday');
+            const eventSpan = document.createElement('span');
+            eventSpan.className = 'calendar-event holiday';
+            eventSpan.textContent = schoolBreak.name;
+            dayElement.appendChild(eventSpan);
+          } else if (camping) {
+            dayElement.classList.add('has-event');
+            const eventSpan = document.createElement('span');
+            eventSpan.className = 'calendar-event camping';
+            eventSpan.textContent = camping.name;
+            dayElement.appendChild(eventSpan);
+          } else if (isMonday) {
+            dayElement.classList.add('meeting-day');
+            const eventSpan = document.createElement('span');
+            eventSpan.className = 'calendar-event meeting';
+            eventSpan.textContent = 'Meeting';
+            dayElement.appendChild(eventSpan);
+          }
+        } else {
+          dayElement.style.color = '#ccc';
+          dayElement.textContent = dayNumber;
+        }
+        
+        calendarGrid.appendChild(dayElement);
+        currentDateObj.setDate(currentDateObj.getDate() + 1);
+      }
+    }
+
+    function changeMonth(direction) {
+      currentDate.setMonth(currentDate.getMonth() + direction);
+      generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+    }
+
+    function showPage(pageId, btn) {
+  // Hide all pages
+  const pages = document.querySelectorAll('.page');
+  pages.forEach(page => page.classList.remove('active'));
+
+  // Remove active class from all nav buttons
+  const navBtns = document.querySelectorAll('.nav-btn');
+  navBtns.forEach(b => b.classList.remove('active'));
+
+  // Show selected page
+  document.getElementById(pageId).classList.add('active');
+
+  // Add active class to clicked nav button
+  btn.classList.add('active');
+}
+
+
+    async function onConfigChange(config) {
+      const troopNameElement = document.getElementById('troop-name');
+      const troopMottoElement = document.getElementById('troop-motto');
+      const meetingDayElement = document.getElementById('meeting-day');
+      const meetingTimeElement = document.getElementById('meeting-time');
+      const meetingLocationElement = document.getElementById('meeting-location');
+      const scoutmasterNameElements = document.querySelectorAll('#scoutmaster-name, #emergency-contact');
+      const contactEmailElements = document.querySelectorAll('#contact-email, #location-contact');
+
+      if (troopNameElement) {
+        troopNameElement.textContent = config.troop_name || defaultConfig.troop_name;
+      }
+      if (troopMottoElement) {
+        troopMottoElement.textContent = config.troop_motto || defaultConfig.troop_motto;
+      }
+      if (meetingDayElement) {
+        meetingDayElement.textContent = config.meeting_day || defaultConfig.meeting_day;
+      }
+      if (meetingTimeElement) {
+        meetingTimeElement.textContent = config.meeting_time || defaultConfig.meeting_time;
+      }
+      if (meetingLocationElement) {
+        meetingLocationElement.textContent = config.meeting_location || defaultConfig.meeting_location;
+      }
+
+      scoutmasterNameElements.forEach(element => {
+        if (element) {
+          element.textContent = config.scoutmaster_name || defaultConfig.scoutmaster_name;
+        }
+      });
+
+      contactEmailElements.forEach(element => {
+        if (element) {
+          element.textContent = config.contact_email || defaultConfig.contact_email;
+        }
+      });
+
+      const backgroundColor = config.background_color || defaultConfig.background_color;
+      const surfaceColor = config.surface_color || defaultConfig.surface_color;
+      const textColor = config.text_color || defaultConfig.text_color;
+      const primaryActionColor = config.primary_action_color || defaultConfig.primary_action_color;
+      const secondaryActionColor = config.secondary_action_color || defaultConfig.secondary_action_color;
+      const customFont = config.font_family || defaultConfig.font_family;
+      const baseSize = config.font_size || defaultConfig.font_size;
+
+      document.body.style.background = linear-gradient(135deg, ${backgroundColor} 0%, ${surfaceColor} 100%);
+      document.body.style.color = textColor;
+      document.body.style.fontFamily = ${customFont}, Arial, sans-serif;
+
+      const header = document.querySelector('.header');
+      if (header) {
+        header.style.background = linear-gradient(135deg, ${backgroundColor} 0%, ${surfaceColor} 100%);
+      }
+
+      const nav = document.querySelector('.nav');
+      if (nav) {
+        nav.style.background = backgroundColor;
+      }
+
+      if (troopNameElement) {
+        troopNameElement.style.fontSize = ${baseSize * 2.25}px;
+      }
+
+      if (troopMottoElement) {
+        troopMottoElement.style.fontSize = ${baseSize * 1.125}px;
+      }
+
+      const headings = document.querySelectorAll('h2');
+      headings.forEach(heading => {
+        heading.style.fontSize = ${baseSize * 1.75}px;
+        heading.style.color = backgroundColor;
+        heading.style.borderBottomColor = primaryActionColor;
+      });
+
+      const subheadings = document.querySelectorAll('h3');
+      subheadings.forEach(subheading => {
+        subheading.style.fontSize = ${baseSize * 1.375}px;
+        subheading.style.color = surfaceColor;
+      });
+
+      const paragraphs = document.querySelectorAll('p');
+      paragraphs.forEach(paragraph => {
+        paragraph.style.fontSize = ${baseSize}px;
+        paragraph.style.color = textColor;
+      });
+
+      const campingDates = document.querySelectorAll('.camping-date');
+      campingDates.forEach(date => {
+        date.style.background = primaryActionColor;
+        date.style.color = textColor;
+      });
+
+      const linkButtons = document.querySelectorAll('.link-btn');
+      linkButtons.forEach(button => {
+        if (!button.classList.contains('scoutbook')) {
+          button.style.background = surfaceColor;
+        }
+      });
+    }
+
+    // Initialize calendar on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+    });
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.background_color || defaultConfig.background_color,
+              set: (value) => {
+                config.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            },
+            {
+              get: () => config.surface_color || defaultConfig.surface_color,
+              set: (value) => {
+                config.surface_color = value;
+                window.elementSdk.setConfig({ surface_color: value });
+              }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => {
+                config.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            },
+            {
+              get: () => config.primary_action_color || defaultConfig.primary_action_color,
+              set: (value) => {
+                config.primary_action_color = value;
+                window.elementSdk.setConfig({ primary_action_color: value });
+              }
+            },
+            {
+              get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+              set: (value) => {
+                config.secondary_action_color = value;
+                window.elementSdk.setConfig({ secondary_action_color: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => {
+              config.font_family = value;
+              window.elementSdk.setConfig({ font_family: value });
+            }
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => {
+              config.font_size = value;
+              window.elementSdk.setConfig({ font_size: value });
+            }
+          }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["troop_name", config.troop_name || defaultConfig.troop_name],
+          ["troop_motto", config.troop_motto || defaultConfig.troop_motto],
+          ["meeting_day", config.meeting_day || defaultConfig.meeting_day],
+          ["meeting_time", config.meeting_time || defaultConfig.meeting_time],
+          ["meeting_location", config.meeting_location || defaultConfig.meeting_location],
+          ["scoutmaster_name", config.scoutmaster_name || defaultConfig.scoutmaster_name],
+          ["contact_email", config.contact_email || defaultConfig.contact_email]
+        ])
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99b4d2b8e69641c4',t:'MTc2MjYwMjMxNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
